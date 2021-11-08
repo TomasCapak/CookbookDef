@@ -10,74 +10,59 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="167dp"
-        android:layout_height="33dp"
+        android:layout_width="275dp"
+        android:layout_height="52dp"
         android:text="@string/recent_recipe"
-        android:textSize="24sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.469" />
+        app:layout_constraintVertical_bias="0.53" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="144dp"
-        android:layout_height="39dp"
+    <View
+        android:id="@+id/recentRecipeView"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.776" />
+
+    <Button
+        android:id="@+id/yourrecipesbutton"
+        android:layout_width="275dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginLeft="59dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginRight="59dp"
         android:text="@string/your_recipes"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="657dp"
-        android:layout_marginEnd="87dp"
-        android:layout_marginRight="87dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/addbutton"
+        android:layout_width="275dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginLeft="59dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginRight="59dp"
+        android:text="@string/add_recipe"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

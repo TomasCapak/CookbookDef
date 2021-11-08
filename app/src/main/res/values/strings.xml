@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="your_recipes">Your Recipes</string>
     <string name="recent_recipe">Recent Recipe</string>
+    <string name="cookbook">CookBook</string>
+    <string name="add_recipe">Add Recipe</string>
 </resources>
