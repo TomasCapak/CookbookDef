@@ -11,12 +11,28 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.database.Cursor;
 public class MainActivity extends AppCompatActivity {
+
+
+    DBHelper mydb;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mydb = new DBHelper(this);
+      //  mydb.pridejKategorii("Maso");
+        Cursor vysledek = mydb.getKategorie();
+        vysledek.moveToFirst();
+
+        while (vysledek.moveToNext()) {
+            System.out.println(vysledek.getString(1));
+        }
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
