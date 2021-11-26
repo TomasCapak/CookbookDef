@@ -33,6 +33,6 @@ public void pridejKategorii(String kat){
     System.out.println("ok");
 }
 
-
+//asd
 
 }
