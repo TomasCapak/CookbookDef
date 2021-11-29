@@ -9,14 +9,54 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import android.database.Cursor;
 
+import androidx.annotation.Nullable;
 
 
 public class DBHelper extends SQLiteOpenHelper {
-    public DBHelper(Context c){
-        super( c,"cookbookdbsqlite.db",null,1);
+
+    private Context context;
+    private static final String DATABASE_NAME = "cookbook.db";
+    private static final int DATABASE_VERSION = 1;
+
+    private static final String OBTIZNOST = "Obtiznost";
+    private static final String ID_OBTIZNOST = "idObtiznost";
+    private static final String UROVEN = "uroven";
+
+
+    private static final String KATEGORIE = "Kategorie";
+    private static final String ID_KATEGORIE = "idkategorie";
+    private static final String NAZEV = "nazev";
+
+    public DBHelper(@Nullable Context context){
+
+        super( context,"cookbook.db",null, DATABASE_VERSION);
+        this.context = context;
     }
-    public void onCreate(SQLiteDatabase db) {}
-    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {}
+
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+        String queryKat = "CREATE TABLE " + KATEGORIE +
+                 " ("  + ID_KATEGORIE + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                NAZEV	+ " TEXT);";
+        db.execSQL(queryKat);
+
+        String queryObt = "CREATE TABLE " + OBTIZNOST +
+                " ("  + ID_OBTIZNOST + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                UROVEN	+ " TEXT);";
+        db.execSQL(queryObt);
+    }
+
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + KATEGORIE);
+        db.execSQL("DROP TABLE IF EXISTS " + OBTIZNOST);
+        onCreate(db);
+    }
+
+
 
     public Cursor getKategorie() {
 
@@ -25,11 +65,16 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor res =  db.rawQuery( "select * from Kategorie", null );
         return res;
     }
-public void pridejKategorii(String kat){
+
+
+
+
+    public void pridejKategorii(String kat){
 
     SQLiteDatabase db = this.getWritableDatabase();
 
-    db.execSQL("INSERT INTO Kategorie VALUES(kat);");
+    db.execSQL("INSERT INTO Kategorie (nazev) VALUES('"+ kat +"');");
+
     System.out.println("ok");
 }
 

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         mydb = new DBHelper(this);
-      //  mydb.pridejKategorii("Maso");
+        mydb.pridejKategorii("Maso");
         Cursor vysledek = mydb.getKategorie();
         vysledek.moveToFirst();
 
