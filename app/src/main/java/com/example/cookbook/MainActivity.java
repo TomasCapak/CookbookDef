@@ -21,30 +21,55 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
         mydb = new DBHelper(this);
         mydb.pridejKategorii("Maso");
+        mydb.pridejObtiznost("Lehka");
+        mydb.pridejJedotku("Kilo");
+        mydb.pridejSurovinu("Brambory");
         Cursor vysledek = mydb.getKategorie();
-        vysledek.moveToFirst();
 
+        vysledek.moveToFirst();
         while (vysledek.moveToNext()) {
-            System.out.println(vysledek.getString(1));
+            //System.out.println(vysledek.getString(1));
         }
 
+        Cursor sur = mydb.getSurovina();
+
+        sur.moveToFirst();
+        while (sur.moveToNext()) {
+            //System.out.println(sur.getString(1));
+        }
+
+        Cursor obt = mydb.getObtiznost();
+
+        obt.moveToFirst();
+        while (obt.moveToNext()) {
+            //System.out.println(obt.getString(1));
+
+        }
+
+        Cursor jed = mydb.getJednotka();
+
+        jed.moveToFirst();
+        while (jed.moveToNext()) {
+            //System.out.println(jed.getString(1));
+
+        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
     }
 
     @Override
