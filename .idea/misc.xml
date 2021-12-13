@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/N3rdy/StudioProjects/CookbookDef/app/src/main/res/drawable/ic_add.xml" value="0.5015625" />
+        <entry key="..\:/Users/N3rdy/StudioProjects/CookbookDef/app/src/main/res/drawable/ic_launcher_background.xml" value="0.5015625" />
+        <entry key="..\:/Users/N3rdy/StudioProjects/CookbookDef/app/src/main/res/layout/activity_add.xml" value="0.3808876811594203" />
         <entry key="..\:/Users/N3rdy/StudioProjects/CookbookDef/app/src/main/res/layout/activity_main.xml" value="0.32864583333333336" />
         <entry key="..\:/Users/N3rdy/StudioProjects/CookbookDef/app/src/main/res/layout/content_main.xml" value="0.32864583333333336" />
       </map>

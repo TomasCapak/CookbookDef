@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "cookbook.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     private static final String OBTIZNOST = "Obtiznosttxt";
     private static final String ID_OBTIZNOST = "idObtiznost";
@@ -37,6 +37,49 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String NAZEVSUROVINA = "nazev";
     private static final String KALORIE = "kalorie";
     private static final String JEDNOTKA_ID_JEDNOTKA = "Jednotka_idJednotka";
+
+    private static final String RECEPT = "Recept";
+    private static final String ID_RECEPT = "idRecept";
+    private static final String NAZEVRECEPT = "nazev";
+    private static final String POPIS = "popis";
+    private static final String POSTUP_VARENI = "postupVareni";
+    private static final String DOBAVARENI = "dobaVareniVMinutach";
+    private static final String OBTIZNOST_ID_OBTIZNOST = "Obtiznost_idObtiznost" ;
+    private static final String KATEGORIE_ID_KATEGORIE = "Kategorie_idKategorie";
+
+
+    private static final String SUROVINA_HAS_RECEPT = "Surovina_has_Recept";
+    private static final String MNOZSTVI = "mnozstvi";
+    private static final String RECEPT_IDRECEPT = "Recept_idRecept";
+    private static final String SUROVINA_IDSUROVINA = "Surovina_idSurovina";
+
+
+
+    String queryShR = "CREATE TABLE " + SUROVINA_HAS_RECEPT +
+
+            " ("  + MNOZSTVI + " integer, " +
+
+            SUROVINA_IDSUROVINA + "integer, " +
+            RECEPT_IDRECEPT + " integer, " +
+
+
+            "FOREIGN KEY ("+SUROVINA_IDSUROVINA+") REFERENCES "+SUROVINA+"("+ID_SUROVINA+"), " +
+            "FOREIGN KEY ("+RECEPT_IDRECEPT+") REFERENCES "+RECEPT+" ("+ID_RECEPT+") )";
+
+
+    String queryRec = "CREATE TABLE " + RECEPT +
+            " ("  + ID_RECEPT + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            NAZEVRECEPT	+ " TEXT, " +
+            POPIS	+ " TEXT, " +
+            POSTUP_VARENI	+ " TEXT, " +
+            DOBAVARENI	+ " integer, " +
+            KATEGORIE_ID_KATEGORIE + " integer, " +
+            OBTIZNOST_ID_OBTIZNOST + " integer, " +
+
+            " FOREIGN KEY ("+OBTIZNOST_ID_OBTIZNOST+") REFERENCES "+KATEGORIE+"("+ID_KATEGORIE+"), " +
+
+            " FOREIGN KEY ("+OBTIZNOST_ID_OBTIZNOST+") REFERENCES "+OBTIZNOST+" ("+ID_OBTIZNOST+"));";
+
 
     String querySur = "CREATE TABLE " + SUROVINA +
             " ("  + ID_SUROVINA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -80,6 +123,8 @@ public class DBHelper extends SQLiteOpenHelper {
         String queryObt = "CREATE TABLE " + OBTIZNOST +
                 " ("  + ID_OBTIZNOST + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 UROVEN	+ " TEXT);";*/
+        db.execSQL(queryShR);
+        db.execSQL(queryRec);
         db.execSQL(querySur);
         db.execSQL(queryJed);
         db.execSQL(queryObt);
@@ -89,6 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + RECEPT);
         db.execSQL("DROP TABLE IF EXISTS " + SUROVINA);
         db.execSQL("DROP TABLE IF EXISTS " + JEDNOTKA);
         db.execSQL("DROP TABLE IF EXISTS " + KATEGORIE);
