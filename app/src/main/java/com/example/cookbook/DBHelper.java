@@ -18,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "cookbook.db";
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 15;
 
     private static final String OBTIZNOST = "Obtiznosttxt";
     private static final String ID_OBTIZNOST = "idObtiznost";
@@ -249,5 +249,23 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     return cursor;
     }
+
+    void updateData(String row_id, String nazevrec, String popis, String postupVareni, String dobaVareniVMincutach) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(NAZEVRECEPT, nazevrec);
+        cv.put(POPIS, popis);
+        cv.put(POSTUP_VARENI, postupVareni);
+        cv.put(DOBAVARENI, dobaVareniVMincutach);
+
+        long result = db.update(RECEPT, cv, "idRecept=?", new String[]{row_id});
+        if(result == -1) {
+            Toast.makeText(context, "Failed to Update.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Successfully Updated!", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
 
 }

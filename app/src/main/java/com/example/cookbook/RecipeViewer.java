@@ -3,9 +3,11 @@ package com.example.cookbook;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ public class RecipeViewer extends AppCompatActivity {
     String postupVareni;
     String dobaVareniVMinutach;
     CustomAdapter customAdapter;
+    Button updateview_button;
 
     TextView recept_id_txt, recept_nazev_txt, recept_popis_txt, recept_postupVareni_txt, recept_DobaVareni_txt;
 
@@ -34,6 +37,8 @@ public class RecipeViewer extends AppCompatActivity {
         recept_popis_txt = findViewById(R.id.recept_popis_txt2);
         recept_postupVareni_txt = findViewById(R.id.recept_postupVareni_txt2);
         recept_DobaVareni_txt = findViewById(R.id.recept_DobaVareni_txt2);
+
+
 
         getIntentData();
 

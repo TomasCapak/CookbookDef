@@ -76,5 +76,16 @@
             app:layout_constraintHorizontal_bias="0.342"
             app:layout_constraintStart_toEndOf="@+id/recept_DobaVareni_txt" />
 
+        <Button
+            android:id="@+id/updaterow_button"
+            android:layout_width="91dp"
+            android:layout_height="48dp"
+            android:text="Update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/recept_nazev_txt"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
