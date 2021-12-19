@@ -11,13 +11,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Update"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".RecipeViewer"
-            android:exported="false" />
-        <activity
-            android:name=".recipeViewer"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".AddActivity"
             android:label="Add Recipe"

@@ -8,6 +8,8 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -24,6 +26,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private Context context;
     Activity activity;
     private ArrayList idRecept, nazevrec, popis, postupVareni, dobaVareniVMinutach;
+
+    Animation translate_anim;
 
 
     CustomAdapter(Activity activity,
@@ -117,7 +121,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             recept_postupVareni_txt = itemView.findViewById(R.id.recept_postupVareni_txt);
             recept_DobaVareni_txt = itemView.findViewById(R.id.recept_DobaVareni_txt);
             mainLayout = itemView.findViewById(R.id.mainLayout);
-
+            translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
+            mainLayout.setAnimation(translate_anim);
             recept_id_txt2 = itemView.findViewById(R.id.recept_id_txt);
             recept_nazev_txt2 = itemView.findViewById(R.id.recept_nazev_txt);
             recept_popis_txt2 = itemView.findViewById(R.id.recept_popis_txt);

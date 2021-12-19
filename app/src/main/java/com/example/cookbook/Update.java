@@ -1,8 +1,11 @@
 package com.example.cookbook;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +23,7 @@ public class Update extends AppCompatActivity {
 
     EditText recept_id_txt, recept_nazev_txt2, recept_popis_txt2, recept_postupVareni_txt2, recept_DobaVareni_txt2;
     Button update_button;
+    Button delete_button;
 
 
     @Override
@@ -44,8 +48,15 @@ public class Update extends AppCompatActivity {
         recept_postupVareni_txt2 = findViewById(R.id.postupVareni_input3);
         recept_DobaVareni_txt2 = findViewById(R.id.dobaVareniVMinutach_input3);
         update_button = findViewById(R.id.update_button);
+        delete_button = findViewById(R.id.delete_button);
 
         getIntentData2();
+
+
+        ActionBar ab = getSupportActionBar();
+       if  (ab != null) {
+           ab.setTitle(nazevrec);
+       }
 
         update_button.bringToFront();
         update_button.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +70,15 @@ public class Update extends AppCompatActivity {
                 dobaVareniVMinutach = recept_DobaVareni_txt2.getText().toString().trim();
 
                 mydb.updateData(idRecept, nazevrec, popis, postupVareni, dobaVareniVMinutach );
+            }
+        });
+
+
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmDialog();
+
             }
         });
 
@@ -91,7 +111,26 @@ public class Update extends AppCompatActivity {
         }
     }
 
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete " + nazevrec + " ?");
+        builder.setMessage("Are you sure you want to delete " + nazevrec + " ?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DBHelper mydb = new DBHelper(Update.this);
+                mydb.deleteOneRow(idRecept);
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        builder.create().show();
+    }
 
 
 

@@ -1,5 +1,6 @@
 package com.example.cookbook;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -41,6 +42,12 @@ public class RecipeViewer extends AppCompatActivity {
 
 
         getIntentData();
+
+
+        ActionBar ab = getSupportActionBar();
+        if  (ab != null) {
+            ab.setTitle(nazevrec);
+        }
 
     }
 

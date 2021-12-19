@@ -1,21 +1,27 @@
 package com.example.cookbook;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.database.Cursor;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     DBHelper mydb;
     RecyclerView recyclerView;
     FloatingActionButton add_button;
+    ImageView empty_imageview;
+    TextView no_data;
     ArrayList<String> idRecept, nazevrec, popis, postupVareni,  dobaVareniVMinutach;
     CustomAdapter customAdapter;
 
@@ -36,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         add_button = findViewById(R.id.add_button);
+        empty_imageview = findViewById(R.id.empty_imageview);
+        no_data = findViewById(R.id.textView);
         recyclerView = findViewById(R.id.recyclerView);
         add_button.bringToFront();
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
             Cursor cursor = mydb.readAllData();
             if (cursor.getCount() == 0) {
-                Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+                empty_imageview.setVisibility(View.VISIBLE);
+                no_data.setVisibility(View.VISIBLE);
             } else {
                 while (cursor.moveToNext()) {
                     idRecept.add(cursor.getString(0));
@@ -85,11 +96,49 @@ public class MainActivity extends AppCompatActivity {
                     dobaVareniVMinutach.add(cursor.getString(4));
 
                 }
+                empty_imageview.setVisibility(View.GONE);
+                no_data.setVisibility(View.GONE);
             }
         }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        //mydb.pridejKategorii("Maso");
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.delete_all){
+            confirmDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete All?");
+        builder.setMessage("Are you sure you want to delete all data?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DBHelper mydb = new DBHelper(MainActivity.this);
+                mydb.deleteAllData();
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create().show();
+    }
+    //mydb.pridejKategorii("Maso");
         //mydb.pridejObtiznost("Lehka");
         //mydb.pridejJedotku("Kilo");
         //mydb.pridejSurovinu("Brambory");
