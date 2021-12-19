@@ -10,10 +10,11 @@
         android:id="@+id/recept_nazev_txt2"
         android:layout_width="319dp"
         android:layout_height="39dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="48dp"
         android:text="Nazev"
+        android:textColor="#000"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,46 +24,126 @@
         android:id="@+id/recept_DobaVareni_txt2"
         android:layout_width="52dp"
         android:layout_height="27dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:alpha="0.7"
         android:text="15"
+        android:textColor="#000"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recept_nazev_txt2" />
 
     <TextView
         android:id="@+id/recept_popis_txt2"
-        android:layout_width="310dp"
-        android:layout_height="134dp"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"
+        android:layout_width="366dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="36dp"
         android:text="asdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfg"
+        android:textColor="#000"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recept_DobaVareni_txt2" />
 
     <TextView
         android:id="@+id/recept_postupVareni_txt2"
-        android:layout_width="309dp"
-        android:layout_height="187dp"
+        android:layout_width="365dp"
+        android:layout_height="191dp"
         android:text="asdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfg"
+        android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.408"
+        app:layout_constraintHorizontal_bias="0.673"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recept_popis_txt2"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.056" />
 
     <TextView
         android:id="@+id/recept_id_txt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0.5"
         android:text="1"
         app:layout_constraintBottom_toTopOf="@+id/recept_nazev_txt2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/recept_nazev_txt2" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="recept_popis_txt2"
+        tools:layout_editor_absoluteY="186dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="recept_postupVareni_txt2"
+        tools:layout_editor_absoluteY="306dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:outlineAmbientShadowColor="#000"
+        app:layout_constraintBottom_toTopOf="@+id/recept_popis_txt2"
+        app:layout_constraintTop_toBottomOf="@+id/recept_nazev_txt2"
+        app:layout_constraintVertical_bias="0.134"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/recept_popis_txt2"
+        app:layout_constraintTop_toBottomOf="@+id/recept_DobaVareni_txt2"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/recept_postupVareni_txt2"
+        app:layout_constraintTop_toBottomOf="@+id/recept_popis_txt2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="1dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
