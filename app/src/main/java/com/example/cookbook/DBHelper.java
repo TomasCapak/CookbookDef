@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import android.database.Cursor;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -17,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "cookbook.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 14;
 
     private static final String OBTIZNOST = "Obtiznosttxt";
     private static final String ID_OBTIZNOST = "idObtiznost";
@@ -25,22 +26,22 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String KATEGORIE = "Kategorie";
     private static final String ID_KATEGORIE = "idKategorie";
-    private static final String NAZEVKATEGORIE = "nazev";
+    private static final String NAZEVKATEGORIE = "nazevkat";
 
     private static final String JEDNOTKA = "Jednotka";
     private static final String ID_JEDNOTKA = "idJednotka";
-    private static final String NAZEVJEDNOTKA = "nazev";
+    private static final String NAZEVJEDNOTKA = "nazevjed";
     private static final String ZKRATKA = "zkratka";
 
     private static final String SUROVINA = "Surovina";
     private static final String ID_SUROVINA = "idSurovina";
-    private static final String NAZEVSUROVINA = "nazev";
+    private static final String NAZEVSUROVINA = "nazevsur";
     private static final String KALORIE = "kalorie";
     private static final String JEDNOTKA_ID_JEDNOTKA = "Jednotka_idJednotka";
 
     private static final String RECEPT = "Recept";
     private static final String ID_RECEPT = "idRecept";
-    private static final String NAZEVRECEPT = "nazev";
+    private static final String NAZEVRECEPT = "nazevrec";
     private static final String POPIS = "popis";
     private static final String POSTUP_VARENI = "postupVareni";
     private static final String DOBAVARENI = "dobaVareniVMinutach";
@@ -55,7 +56,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    String queryShR = "CREATE TABLE " + SUROVINA_HAS_RECEPT +
+    /*String queryShR = "CREATE TABLE " + SUROVINA_HAS_RECEPT +
 
             " ("  + MNOZSTVI + " integer, " +
 
@@ -63,8 +64,9 @@ public class DBHelper extends SQLiteOpenHelper {
             RECEPT_IDRECEPT + " integer, " +
 
 
-            "FOREIGN KEY ("+SUROVINA_IDSUROVINA+") REFERENCES "+SUROVINA+"("+ID_SUROVINA+"), " +
-            "FOREIGN KEY ("+RECEPT_IDRECEPT+") REFERENCES "+RECEPT+" ("+ID_RECEPT+") )";
+            " FOREIGN KEY ("+SUROVINA_IDSUROVINA+") REFERENCES "+SUROVINA+"("+ID_SUROVINA+"), " +
+
+            " FOREIGN KEY ("+RECEPT_IDRECEPT+") REFERENCES "+RECEPT+" ("+ID_RECEPT+"));";*/
 
 
     String queryRec = "CREATE TABLE " + RECEPT +
@@ -76,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
             KATEGORIE_ID_KATEGORIE + " integer, " +
             OBTIZNOST_ID_OBTIZNOST + " integer, " +
 
-            " FOREIGN KEY ("+OBTIZNOST_ID_OBTIZNOST+") REFERENCES "+KATEGORIE+"("+ID_KATEGORIE+"), " +
+            " FOREIGN KEY ("+KATEGORIE_ID_KATEGORIE+") REFERENCES "+KATEGORIE+"("+ID_KATEGORIE+"), " +
 
             " FOREIGN KEY ("+OBTIZNOST_ID_OBTIZNOST+") REFERENCES "+OBTIZNOST+" ("+ID_OBTIZNOST+"));";
 
@@ -123,7 +125,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String queryObt = "CREATE TABLE " + OBTIZNOST +
                 " ("  + ID_OBTIZNOST + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 UROVEN	+ " TEXT);";*/
-        db.execSQL(queryShR);
+        //db.execSQL(queryShR);
         db.execSQL(queryRec);
         db.execSQL(querySur);
         db.execSQL(queryJed);
@@ -142,7 +144,22 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void addRecipe(String nazevrec, String popis, String postupVareni, int dobaVareni) {
 
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(NAZEVRECEPT, nazevrec);
+        cv.put(POPIS, popis);
+        cv.put(POSTUP_VARENI, postupVareni);
+        cv.put(DOBAVARENI, dobaVareni);
+        long result = db.insert(RECEPT, null, cv);
+        if (result == -1) {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
     public void insertEntryKategorie(SQLiteDatabase db, int ID_KATEGORIE,String NAZEV) {
 
         ContentValues newValues = new ContentValues();
@@ -160,7 +177,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public Cursor getKategorie() {
+    /*public Cursor getKategorie() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =    db.rawQuery( "select * from Kategorie", null );
         return res;
@@ -220,8 +237,17 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Surovina (nazev) VALUES('"+ sur +"');");
         System.out.println("--");
 
-    }
+    }*/
 
 //asd
+    Cursor readAllData(){
+    String query = "SELECT * FROM  " + RECEPT;
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor cursor = null;
+    if (db != null) {
+        cursor = db.rawQuery(query, null);
+    }
+    return cursor;
+    }
 
 }
